@@ -1,32 +1,30 @@
-﻿namespace CSharpLabs;
+﻿using System.Text;
+using Microsoft.Extensions.Hosting;
 
-public class MarriageProblem
+namespace CSharpLabs;
+
+public class MarriageProblem : IHostedService
 {
     private readonly int _contenderNumber;
-    private readonly Hall _hall;
-    private readonly Princess _princess;
+    private readonly IHall _hall;
+    private readonly IPrincess _princess;
+    private StreamWriter _streamWriter;
     private const int LevelOfSatisfactionOfChoosingNoOne = 10;
 
-    public MarriageProblem(int contenderNumber, int threshold)
+    public MarriageProblem(int contenderNumber, IPrincess princess, IHall hall , StreamWriter streamWriter)
     {
         _contenderNumber = contenderNumber;
-        _hall = new Hall(contenderNumber);
-        _princess = new Princess(new Freind(), contenderNumber, threshold);
+        _hall = hall;
+        _streamWriter = streamWriter;
+        _princess = princess;
     }
 
-    public MarriageProblem(string file, int contenderNumber, int threshold)
-    {
-        _contenderNumber = contenderNumber;
-        _hall = new Hall(file, contenderNumber);
-        _princess = new Princess(new Freind(), contenderNumber, threshold);
-    }
-
-    public int SolveProblem()
+    private int SolveProblem()
     {
         int i = 0;
         do
         {
-            _princess.ConsiderContender(_hall.Get(i++));
+            _princess.ConsiderContender(_hall[i++]);
         } while (!_princess.IsChosenOne() && i < _contenderNumber);
 
         Contender? husband = _princess.GetHusband();
@@ -38,9 +36,27 @@ public class MarriageProblem
         return husband.GetScore() > _contenderNumber / 2 ? _princess.GetHusband()!.GetScore() : 0;
     }
 
-    public Hall GetHall()
+    private void SolveAndPrint()
     {
-        return _hall;
+        IHall hall = _hall;
+        for (int i = 0; i < 100; ++i)
+        {
+            _streamWriter.WriteLine(hall[i]!.GetName() + $":{hall[i]!.GetScore()} {i}");
+        }
+        _streamWriter.WriteLine("-----------");
+        _streamWriter.WriteLine(SolveProblem());
+        _streamWriter.Close();
     }
 
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        SolveAndPrint();
+        _streamWriter.Close();
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
 }

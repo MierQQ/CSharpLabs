@@ -1,6 +1,6 @@
 ﻿namespace CSharpLabs;
 
-public class Freind
+public class Freind : IFreind
 {
     public Contender? GetBestContender(Contender? contenderFirst, Contender? contenderSecond)
     {

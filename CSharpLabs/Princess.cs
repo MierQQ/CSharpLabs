@@ -2,17 +2,17 @@
 
 namespace CSharpLabs;
 
-public class Princess
+public class Princess : IPrincess
 {
     private Contender? _maxContender;
     private bool _isChosenOne;
     private int _counter;
     private readonly int _threshold;
     private readonly int _contenderNumber;
-    private readonly Freind _freind;
+    private readonly IFreind _freind;
     
 
-    public Princess(Freind freind, int contenderNumber, int threshold)
+    public Princess(IFreind freind, int contenderNumber, int threshold)
     {
         _isChosenOne = false;
         if (contenderNumber <= threshold)

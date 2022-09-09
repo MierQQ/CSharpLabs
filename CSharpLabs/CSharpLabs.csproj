@@ -11,4 +11,8 @@
       <None Include="bin\Debug\net6.0\names.txt" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0-preview.7.22375.6" />
+    </ItemGroup>
+
 </Project>
