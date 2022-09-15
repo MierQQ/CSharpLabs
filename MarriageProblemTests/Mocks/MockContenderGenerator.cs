@@ -7,7 +7,7 @@ public class MockContenderGenerator : IContenderGenerator
 {
     public delegate Contender Index2Contender(int index);
 
-    private Index2Contender _index2Contender;
+    private readonly Index2Contender _index2Contender;
     public MockContenderGenerator(Index2Contender index2Contender)
     {
         _index2Contender = index2Contender;

@@ -1,4 +1,3 @@
-using System.Collections;
 using CSharpLabs.Exceptions;
 using CSharpLabs.MarriageProblem.Contender;
 using CSharpLabs.MarriageProblem.ContenderGenerator;
@@ -32,12 +31,18 @@ public class FreindTest
     public void FreindTestCorrectComparation()
     {
         var freind = new Freind();
-        var firstContender = new Contender(1, "firstContender");
-        firstContender.IsChecked = true;
-        var secondContender = new Contender(2, "secondContender");
-        secondContender.IsChecked = true;
-        var thirdContender = new Contender(1, "thirdContender");
-        thirdContender.IsChecked = true;
+        var firstContender = new Contender(1, "firstContender")
+        {
+            IsChecked = true
+        };
+        var secondContender = new Contender(2, "secondContender")
+        {
+            IsChecked = true
+        };
+        var thirdContender = new Contender(1, "thirdContender")
+        {
+            IsChecked = true
+        };
         Assert.Multiple(() =>
         {
             Assert.That(freind.GetBestContender(firstContender, secondContender), Is.EqualTo(secondContender));

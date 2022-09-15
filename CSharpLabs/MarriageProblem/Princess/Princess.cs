@@ -6,8 +6,8 @@ namespace CSharpLabs.MarriageProblem.Princess;
 public class Princess : IPrincess
 {
     private Contender.Contender? _maxContender;
-    private bool _isChosenOne;
-    public bool IsChosenOne => _isChosenOne;
+    public bool IsChosenOne { get; private set; }
+
     private int _counter;
     private readonly int _threshold;
     private readonly int _contenderNumber;
@@ -16,7 +16,7 @@ public class Princess : IPrincess
 
     public Princess(IFreind freind, int contenderNumber, int threshold)
     {
-        _isChosenOne = false;
+        IsChosenOne = false;
         if (contenderNumber <= threshold)
         {
             throw new MarriageProblemException("Wrong threshold");
@@ -35,18 +35,18 @@ public class Princess : IPrincess
             throw new MarriageProblemException("Out of range");
         }
         _maxContender = _freind.GetBestContender(_maxContender, contender);
-        _isChosenOne = _counter > _threshold && _maxContender == contender;
+        IsChosenOne = _counter > _threshold && _maxContender == contender;
         if (_counter == _contenderNumber)
         {
             _maxContender = contender;
-            _isChosenOne = true;
+            IsChosenOne = true;
         }
         contender.IsChecked = true;
     }
 
     public Contender.Contender? GetHusband()
     {
-        if (_isChosenOne)
+        if (IsChosenOne)
         {
             return _maxContender;
         }

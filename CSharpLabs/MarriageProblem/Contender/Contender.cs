@@ -2,23 +2,16 @@
 
 public class Contender
 {
-    private readonly int _score;
-    public int Score => _score;
-    
-    private readonly string _name;
-    public string Name => _name;
-    
-    private bool _isChecked;
-    public bool IsChecked
-    {
-        get => _isChecked;
-        set => _isChecked = value;
-    }
+    public int Score { get; }
+
+    public string Name { get; }
+
+    public bool IsChecked { get; set; }
 
     public Contender(int score, string name)
     {
-        _isChecked = false;
-        _score = score;
-        _name = name;
+        IsChecked = false;
+        Score = score;
+        Name = name;
     }
 }

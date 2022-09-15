@@ -4,7 +4,7 @@ namespace CSharpLabs.MarriageProblem.ContenderGenerator;
 
 public class DefaultContenderGenerator : IContenderGenerator
 {
-    private Random _random;
+    private readonly Random _random;
     
     private void Shuffle<T>(T[] array)
     {

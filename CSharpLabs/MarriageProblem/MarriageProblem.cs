@@ -9,7 +9,7 @@ public class MarriageProblem : IHostedService
     private readonly int _contenderNumber;
     private readonly IHall _hall;
     private readonly IPrincess _princess;
-    private StreamWriter _streamWriter;
+    private readonly StreamWriter _streamWriter;
     private const int LevelOfSatisfactionOfChoosingNoOne = 10;
 
     public MarriageProblem(int contenderNumber, IPrincess princess, IHall hall , StreamWriter streamWriter)
@@ -42,7 +42,7 @@ public class MarriageProblem : IHostedService
         var hall = _hall;
         for (var i = 0; i < 100; ++i)
         {
-            _streamWriter.WriteLine(hall[i]!.Name + $":{hall[i]!.Score} {i}");
+            _streamWriter.WriteLine(hall[i].Name + $":{hall[i].Score} {i}");
         }
         _streamWriter.WriteLine("-----------");
         _streamWriter.WriteLine(SolveProblem());
