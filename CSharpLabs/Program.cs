@@ -1,4 +1,8 @@
 ﻿using System.Text;
+using CSharpLabs.MarriageProblem.ContenderGenerator;
+using CSharpLabs.MarriageProblem.Freind;
+using CSharpLabs.MarriageProblem.Hall;
+using CSharpLabs.MarriageProblem.Princess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -17,7 +21,7 @@ class Program
         var threshold = int.Parse(args[1]);
         return Host.CreateDefaultBuilder(args).ConfigureServices(
             services => services
-                .AddHostedService<MarriageProblem>(x=>new MarriageProblem(
+                .AddHostedService<MarriageProblem.MarriageProblem>(x=>new MarriageProblem.MarriageProblem(
                     contenderNumber,
                     x.GetRequiredService<IPrincess>(),
                     x.GetRequiredService<IHall>(), new StreamWriter("out.txt", false, Encoding.UTF8)))

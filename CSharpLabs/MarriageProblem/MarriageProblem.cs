@@ -1,7 +1,8 @@
-﻿using System.Text;
+﻿using CSharpLabs.MarriageProblem.Hall;
+using CSharpLabs.MarriageProblem.Princess;
 using Microsoft.Extensions.Hosting;
 
-namespace CSharpLabs;
+namespace CSharpLabs.MarriageProblem;
 
 public class MarriageProblem : IHostedService
 {
@@ -21,27 +22,27 @@ public class MarriageProblem : IHostedService
 
     private int SolveProblem()
     {
-        int i = 0;
+        var i = 0;
         do
         {
             _princess.ConsiderContender(_hall[i++]);
-        } while (!_princess.IsChosenOne() && i < _contenderNumber);
+        } while (!_princess.IsChosenOne && i < _contenderNumber);
 
-        Contender? husband = _princess.GetHusband();
+        var husband = _princess.GetHusband();
         if (husband == null)
         {
             return LevelOfSatisfactionOfChoosingNoOne;
         }
 
-        return husband.GetScore() > _contenderNumber / 2 ? _princess.GetHusband()!.GetScore() : 0;
+        return husband.Score > _contenderNumber / 2 ? _princess.GetHusband()!.Score : 0;
     }
 
     private void SolveAndPrint()
     {
-        IHall hall = _hall;
-        for (int i = 0; i < 100; ++i)
+        var hall = _hall;
+        for (var i = 0; i < 100; ++i)
         {
-            _streamWriter.WriteLine(hall[i]!.GetName() + $":{hall[i]!.GetScore()} {i}");
+            _streamWriter.WriteLine(hall[i]!.Name + $":{hall[i]!.Score} {i}");
         }
         _streamWriter.WriteLine("-----------");
         _streamWriter.WriteLine(SolveProblem());

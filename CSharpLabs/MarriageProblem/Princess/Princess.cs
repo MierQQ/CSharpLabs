@@ -1,11 +1,13 @@
 ﻿using CSharpLabs.Exceptions;
+using CSharpLabs.MarriageProblem.Freind;
 
-namespace CSharpLabs;
+namespace CSharpLabs.MarriageProblem.Princess;
 
 public class Princess : IPrincess
 {
-    private Contender? _maxContender;
+    private Contender.Contender? _maxContender;
     private bool _isChosenOne;
+    public bool IsChosenOne => _isChosenOne;
     private int _counter;
     private readonly int _threshold;
     private readonly int _contenderNumber;
@@ -26,9 +28,12 @@ public class Princess : IPrincess
         _freind = freind;
     }
 
-    public void ConsiderContender(Contender? contender)
+    public void ConsiderContender(Contender.Contender contender)
     {
-        _counter++;
+        if (_counter++ >= _contenderNumber)
+        {
+            throw new MarriageProblemException("Out of range");
+        }
         _maxContender = _freind.GetBestContender(_maxContender, contender);
         _isChosenOne = _counter > _threshold && _maxContender == contender;
         if (_counter == _contenderNumber)
@@ -36,14 +41,10 @@ public class Princess : IPrincess
             _maxContender = contender;
             _isChosenOne = true;
         }
+        contender.IsChecked = true;
     }
 
-    public bool IsChosenOne()
-    {
-        return _isChosenOne;
-    }
-
-    public Contender? GetHusband()
+    public Contender.Contender? GetHusband()
     {
         if (_isChosenOne)
         {
