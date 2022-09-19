@@ -1,5 +1,5 @@
-﻿using CSharpLabs.Exceptions;
-using CSharpLabs.MarriageProblem.ContenderGenerator;
+﻿using CSharpLabs.MarriageProblem.ContenderGenerator;
+using CSharpLabs.MarriageProblem.Exceptions;
 
 namespace CSharpLabs.MarriageProblem.Hall;
 

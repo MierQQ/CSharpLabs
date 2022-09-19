@@ -10,18 +10,21 @@ namespace CSharpLabs;
 
 class Program
 {
+    protected Program()
+    {
+    }
     public static void Main(string[] args)
     {
         CreateHostBuilder(args).Build().Start();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args)
+    private static IHostBuilder CreateHostBuilder(string[] args)
     {
         var contenderNumber = int.Parse(args[0]);
         var threshold = int.Parse(args[1]);
         return Host.CreateDefaultBuilder(args).ConfigureServices(
             services => services
-                .AddHostedService<MarriageProblem.MarriageProblem>(x=>new MarriageProblem.MarriageProblem(
+                .AddHostedService(x=>new MarriageProblem.MarriageProblem(
                     contenderNumber,
                     x.GetRequiredService<IPrincess>(),
                     x.GetRequiredService<IHall>(), new StreamWriter("out.txt", false, Encoding.UTF8)))

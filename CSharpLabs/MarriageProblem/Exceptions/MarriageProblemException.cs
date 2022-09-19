@@ -1,4 +1,4 @@
-﻿namespace CSharpLabs.Exceptions;
+﻿namespace CSharpLabs.MarriageProblem.Exceptions;
 
 public class MarriageProblemException : Exception
 {

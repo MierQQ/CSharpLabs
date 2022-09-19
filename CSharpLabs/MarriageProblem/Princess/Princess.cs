@@ -1,4 +1,4 @@
-﻿using CSharpLabs.Exceptions;
+﻿using CSharpLabs.MarriageProblem.Exceptions;
 using CSharpLabs.MarriageProblem.Freind;
 
 namespace CSharpLabs.MarriageProblem.Princess;

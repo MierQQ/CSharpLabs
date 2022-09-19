@@ -1,4 +1,4 @@
-﻿using CSharpLabs.Exceptions;
+﻿using CSharpLabs.MarriageProblem.Exceptions;
 
 namespace CSharpLabs.MarriageProblem.ContenderGenerator;
 
