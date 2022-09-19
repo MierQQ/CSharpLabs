@@ -145,7 +145,5 @@ public class PrincessTest
                 princess.ConsiderContender(hall[i++]);
             } while (i < 101);
         }));
-        
-        
     }
 }
