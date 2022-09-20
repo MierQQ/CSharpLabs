@@ -1,6 +1,6 @@
 ﻿namespace CSharpLabs.MarriageProblem.Contender;
 
-public class Contender
+public class Contender : IContender
 {
     public int Score { get; }
 

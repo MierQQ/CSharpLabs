@@ -2,6 +2,7 @@
 using CSharpLabs.MarriageProblem.Exceptions;
 using CSharpLabs.MarriageProblem.Freind;
 using FluentAssertions;
+using Moq;
 
 namespace MarriageProblemTests;
 
@@ -12,18 +13,18 @@ public class FreindTest
     {
         //Arrange
         var freind = new Freind();
-        var firstContender = new Contender(1, "firstContender")
-        {
-            IsChecked = true
-        };
-        var secondContender = new Contender(2, "secondContender")
-        {
-            IsChecked = true
-        };
-        var thirdContender = new Contender(1, "thirdContender")
-        {
-            IsChecked = true
-        };
+        var firstContenderMock = new Mock<IContender>();
+        var secondContenderMock = new Mock<IContender>();
+        var thirdContenderMock = new Mock<IContender>();
+        firstContenderMock.Setup(p => p.Score).Returns(1);
+        secondContenderMock.Setup(p => p.Score).Returns(2);
+        thirdContenderMock.Setup(p => p.Score).Returns(1);
+        firstContenderMock.Setup(p => p.IsChecked).Returns(true);
+        secondContenderMock.Setup(p => p.IsChecked).Returns(true);
+        thirdContenderMock.Setup(p => p.IsChecked).Returns(true);
+        var firstContender = firstContenderMock.Object;
+        var secondContender = secondContenderMock.Object;
+        var thirdContender = thirdContenderMock.Object;
         //Act + Assert
         Assert.Multiple(() =>
         {
@@ -42,10 +43,15 @@ public class FreindTest
     {
         //Arrange
         var freind = new Freind();
-        var firstContender = new Contender(1, "firstContender");
-        var secondContender = new Contender(2, "secondContender");
+        var firstContenderMock = new Mock<IContender>();
+        var secondContenderMock = new Mock<IContender>();
+        firstContenderMock.Setup(p => p.IsChecked).Returns(false);
+        secondContenderMock.Setup(p => p.IsChecked).Returns(false);
+        var firstContender = firstContenderMock.Object;
+        var secondContender = secondContenderMock.Object;
+        
         Action action = () => freind.GetBestContender(firstContender, secondContender);
         //Act + Assert
-        action.Should().Throw<MarriageProblemException>().WithMessage("Comparation of two unknown contenders");
+        action.Should().Throw<MarriageProblemException>().WithMessage("Two unknown contenders");
     }
 }

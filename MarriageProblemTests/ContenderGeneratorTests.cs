@@ -1,4 +1,5 @@
-﻿using CSharpLabs.MarriageProblem.ContenderGenerator;
+﻿using CSharpLabs.MarriageProblem.Contender.ContenderBuilder;
+using CSharpLabs.MarriageProblem.ContenderGenerator;
 using FluentAssertions;
 
 namespace MarriageProblemTests;
@@ -9,7 +10,7 @@ public class ContenderGeneratorTests
     public void ContenderGeneratorTestUniqueNames()
     {
         //Arrange
-        var generator = new DefaultContenderGenerator();
+        var generator = new DefaultContenderGenerator(new ContenderBuilder());
         //Act
         var contenders = generator.GetContenders(100);
         //Assert

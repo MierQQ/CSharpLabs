@@ -2,5 +2,5 @@
 
 public interface IFreind
 {
-    public Contender.Contender? GetBestContender(Contender.Contender? contenderFirst, Contender.Contender? contenderSecond);
+    public Contender.IContender? GetBestContender(Contender.IContender? contenderFirst, Contender.IContender? contenderSecond);
 }

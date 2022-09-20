@@ -4,13 +4,13 @@ namespace CSharpLabs.MarriageProblem.Freind;
 
 public class Freind : IFreind
 {
-    public Contender.Contender? GetBestContender(Contender.Contender? contenderFirst, Contender.Contender? contenderSecond)
+    public Contender.IContender? GetBestContender(Contender.IContender? contenderFirst, Contender.IContender? contenderSecond)
     {
         if (contenderFirst == null && contenderSecond == null)
         {
             return null;
         }
-        
+
         if (contenderFirst == null || contenderSecond == null)
         {
             return contenderFirst ?? contenderSecond;
@@ -18,9 +18,9 @@ public class Freind : IFreind
 
         if (!contenderFirst.IsChecked && !contenderSecond.IsChecked)
         {
-            throw new MarriageProblemException("Comparation of two unknown contenders");
+            throw new MarriageProblemException("Two unknown contenders");
         }
-        
+
         return contenderFirst.Score > contenderSecond.Score ? contenderFirst : contenderSecond;
     }
 }

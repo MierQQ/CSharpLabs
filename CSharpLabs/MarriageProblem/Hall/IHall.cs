@@ -2,5 +2,5 @@
 
 public interface IHall
 {
-    public Contender.Contender this[int number] { get;}
+    public Contender.IContender this[int number] { get;}
 }

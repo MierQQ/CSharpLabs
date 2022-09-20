@@ -13,9 +13,10 @@ public class HallTest
     public void HallTestGetContenders()
     {
         //Arrange
-        var contender = new Contender(1, "mock");
-        var contenders = new Contender[100];
-        for (int i = 0; i < 100; ++i)
+        var contenderMock = new Mock<IContender>();
+        var contender = contenderMock.Object;
+        var contenders = new IContender[100];
+        for (var i = 0; i < 100; ++i)
         {
             contenders[i] = contender;
         }
@@ -36,16 +37,17 @@ public class HallTest
     public void HallTestOutOfRange()
     {
         //Arrange
-        var contender = new Contender(1, "mock");
-        var contenders = new Contender[100];
-        for (int i = 0; i < 100; ++i)
+        var contenderMock = new Mock<IContender>();
+        var contender = contenderMock.Object;
+        var contenders = new IContender[100];
+        for (var i = 0; i < 100; ++i)
         {
             contenders[i] = contender;
         }
         var contenderGenerator = new Mock<IContenderGenerator>();
         contenderGenerator.Setup(p => p.GetContenders(100)).Returns(contenders);
         var hall = new Hall(100, contenderGenerator.Object);
-        Action action = () =>
+        var action = () =>
         {
             var tmp = hall[100];
         };

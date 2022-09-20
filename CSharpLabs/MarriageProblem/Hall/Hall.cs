@@ -5,7 +5,7 @@ namespace CSharpLabs.MarriageProblem.Hall;
 
 public class Hall : IHall
 {
-    private readonly Contender.Contender[] _contenders;
+    private readonly Contender.IContender[] _contenders;
     private readonly int _contenderNumber;
     
     public Hall(int contenderNumber, IContenderGenerator contenderGenerator)
@@ -14,7 +14,7 @@ public class Hall : IHall
         _contenders = contenderGenerator.GetContenders(contenderNumber);
     }
 
-    public Contender.Contender this[int number]
+    public Contender.IContender this[int number]
     {
         get
         {

@@ -5,7 +5,7 @@ namespace CSharpLabs.MarriageProblem.Princess;
 
 public class Princess : IPrincess
 {
-    private Contender.Contender? _maxContender;
+    private Contender.IContender? _maxContender;
     public bool IsChosenOne { get; private set; }
 
     private int _counter;
@@ -28,7 +28,7 @@ public class Princess : IPrincess
         _freind = freind;
     }
 
-    public void ConsiderContender(Contender.Contender contender)
+    public void ConsiderContender(Contender.IContender contender)
     {
         if (_counter++ >= _contenderNumber)
         {
@@ -44,7 +44,7 @@ public class Princess : IPrincess
         contender.IsChecked = true;
     }
 
-    public Contender.Contender? GetHusband()
+    public Contender.IContender? GetHusband()
     {
         if (IsChosenOne)
         {

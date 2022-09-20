@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using CSharpLabs.MarriageProblem.Contender.ContenderBuilder;
 using CSharpLabs.MarriageProblem.ContenderGenerator;
 using CSharpLabs.MarriageProblem.Freind;
 using CSharpLabs.MarriageProblem.Hall;
@@ -15,6 +16,7 @@ class Program
     }
     public static void Main(string[] args)
     {
+        System.Console.Out.WriteLine();
         CreateHostBuilder(args).Build().Start();
     }
 
@@ -37,6 +39,7 @@ class Program
                     contenderNumber,
                     x.GetRequiredService<IContenderGenerator>()))
                 .AddScoped<IContenderGenerator, DefaultContenderGenerator>()
+                .AddScoped<IContenderBuilder, ContenderBuilder>()
         );
     }
 }

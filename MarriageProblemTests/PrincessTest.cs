@@ -3,6 +3,7 @@ using CSharpLabs.MarriageProblem.Exceptions;
 using CSharpLabs.MarriageProblem.Freind;
 using CSharpLabs.MarriageProblem.Princess;
 using FluentAssertions;
+using Moq;
 
 namespace MarriageProblemTests;
 
@@ -12,13 +13,17 @@ public class PrincessTest
     public void PrincessTestBusinessLogic()
     {
         //Arrange
-        var princess = new Princess(new Freind(), 100, 9);
+        var contenderMock = new Mock<IContender>();
+        var freindMock = new Mock<IFreind>();
+        freindMock.Setup(p => p.GetBestContender(It.IsAny<IContender?>(), It.IsAny<IContender?>())).Returns(contenderMock.Object);
+        var princess = new Princess(freindMock.Object, 100, 9);
         //Act
-        for (int i = 0; i < 100; ++i)
+        for (var i = 0; i < 100; ++i)
         {
-            princess.ConsiderContender(new Contender(i + 1, $"{i + 1}"));
+            princess.ConsiderContender(contenderMock.Object);
         }
         //Assert
+        
         princess.GetHusband().Should()
             .Match(p => princess.IsChosenOne && p != null || !princess.IsChosenOne && p == null);
     }
@@ -26,14 +31,17 @@ public class PrincessTest
     [Test]
     public void PrincessTestOutOfRange()
     {
-        var princess = new Princess(new Freind(), 100, 9);
-        for (int i = 0; i < 100; ++i)
+        //Arrange
+        var contenderMock = new Mock<IContender>();
+        var freindMock = new Mock<IFreind>();
+        freindMock.Setup(p => p.GetBestContender(It.IsAny<IContender?>(), It.IsAny<IContender?>())).Returns(contenderMock.Object);
+        var princess = new Princess(freindMock.Object, 100, 9);
+        for (var i = 0; i < 100; ++i)
         {
-            princess.ConsiderContender(new Contender(i + 1, $"{i + 1}"));
+            princess.ConsiderContender(contenderMock.Object);
         }
-
-        Action action = () => princess.ConsiderContender(new Contender(101, "101"));
-
+        var action = () => princess.ConsiderContender(contenderMock.Object);
+        //Act + Assert
         action.Should().Throw<MarriageProblemException>().WithMessage("Out of range");
     }
 }
