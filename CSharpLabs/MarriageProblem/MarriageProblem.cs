@@ -1,5 +1,6 @@
 ﻿using CSharpLabs.MarriageProblem.Hall;
 using CSharpLabs.MarriageProblem.Princess;
+using CSharpLabs.MarriageProblem.Writer;
 using Microsoft.Extensions.Hosting;
 
 namespace CSharpLabs.MarriageProblem;
@@ -9,14 +10,14 @@ public class MarriageProblem : IHostedService
     private readonly int _contenderNumber;
     private readonly IHall _hall;
     private readonly IPrincess _princess;
-    private readonly StreamWriter _streamWriter;
+    private readonly IWriter _writer;
     private const int LevelOfSatisfactionOfChoosingNoOne = 10;
 
-    public MarriageProblem(int contenderNumber, IPrincess princess, IHall hall , StreamWriter streamWriter)
+    public MarriageProblem(int contenderNumber, IPrincess princess, IHall hall , IWriter writer)
     {
         _contenderNumber = contenderNumber;
         _hall = hall;
-        _streamWriter = streamWriter;
+        _writer = writer;
         _princess = princess;
     }
 
@@ -39,20 +40,12 @@ public class MarriageProblem : IHostedService
 
     private void SolveAndPrint()
     {
-        var hall = _hall;
-        for (var i = 0; i < 100; ++i)
-        {
-            _streamWriter.WriteLine(hall[i].Name + $":{hall[i].Score} {i}");
-        }
-        _streamWriter.WriteLine("-----------");
-        _streamWriter.WriteLine(SolveProblem());
-        _streamWriter.Close();
+        _writer.Write(_hall, SolveProblem());
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
         SolveAndPrint();
-        _streamWriter.Close();
         return Task.CompletedTask;
     }
 
