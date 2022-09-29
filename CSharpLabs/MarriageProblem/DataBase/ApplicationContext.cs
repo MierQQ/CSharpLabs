@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace CSharpLabs.MarriageProblem.DataBase;
 
@@ -26,6 +27,10 @@ public class ApplicationContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=marriage;Username=postgres;Password=ghbdtn");
+        optionsBuilder.UseNpgsql($"Host={ConfigurationManager.AppSettings["dbIp"]};" +
+                                 $"Port={ConfigurationManager.AppSettings["port"]};" +
+                                 $"Database={ConfigurationManager.AppSettings["database"]};" +
+                                 $"Username={ConfigurationManager.AppSettings["dbUsername"]};" +
+                                 $"Password={ConfigurationManager.AppSettings["dbPassword"]}");
     }
 }
