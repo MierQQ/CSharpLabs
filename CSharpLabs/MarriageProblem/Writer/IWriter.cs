@@ -1,5 +1,4 @@
-﻿using CSharpLabs.MarriageProblem.Contender;
-using CSharpLabs.MarriageProblem.Hall;
+﻿using CSharpLabs.MarriageProblem.Hall;
 
 namespace CSharpLabs.MarriageProblem.Writer;
 

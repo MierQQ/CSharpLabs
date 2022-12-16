@@ -1,10 +1,10 @@
-﻿namespace CSharpLabs.MarriageProblem.Web.Controllers;
+﻿namespace CSharpLabs.MarriageProblem.Web.Controllers.DTO;
 
-public class RankDTO
+public class RankDto
 {
     public int Rank { get; set; }
 
-    public RankDTO(int rank)
+    public RankDto(int rank)
     {
         this.Rank = rank;
     }

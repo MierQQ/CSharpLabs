@@ -1,10 +1,9 @@
-﻿using System.Configuration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace CSharpLabs.MarriageProblem.DataBase;
 
-public class ApplicationContext : DbContext
+public sealed class ApplicationContext : DbContext
 {
     public DbSet<NameDb> Names { get; set; } = null!;
     public DbSet<AttemptMemberDb> AttemptMembers { get; set; } = null!;

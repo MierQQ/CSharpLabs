@@ -1,5 +1,4 @@
 ﻿using CSharpLabs.MarriageProblem.Web.Controllers;
-using CSharpLabs.MarriageProblem.Writer;
 
 namespace CSharpLabs.MarriageProblem.Web;
 

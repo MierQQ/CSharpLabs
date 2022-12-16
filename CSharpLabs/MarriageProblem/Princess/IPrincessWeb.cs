@@ -6,19 +6,10 @@ public interface IPrincessWeb
     public void ConsiderContender(string contender);
     public string? GetHusband();
 
-    public int Attempt
-    {
-        set;
-    }
+    public int Attempt { get; set; }
 
-    public int Session
-    {
-        set;
-    }
+    public int Session { get; set; }
 
 
-    public HttpClient Client
-    {
-        set;
-    }
+    public HttpClient Client { get; set; }
 }

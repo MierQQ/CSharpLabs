@@ -1,10 +1,10 @@
-﻿namespace CSharpLabs.MarriageProblem.Web.Controllers;
+﻿namespace CSharpLabs.MarriageProblem.Web.Controllers.DTO;
 
-public class ContenderDTO
+public class ContenderDto
 {
     public string? Text { get; set; }
 
-    public ContenderDTO(string? text)
+    public ContenderDto(string? text)
     {
         this.Text = text;
     }

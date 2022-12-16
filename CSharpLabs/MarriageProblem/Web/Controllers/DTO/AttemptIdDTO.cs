@@ -1,10 +1,10 @@
-﻿namespace CSharpLabs.MarriageProblem.Web.Controllers;
+﻿namespace CSharpLabs.MarriageProblem.Web.Controllers.DTO;
 
-public class AttemptIdDTO
+public class AttemptIdDto
 {
     public int Id { get; set; }
 
-    public AttemptIdDTO(int id)
+    public AttemptIdDto(int id)
     {
         this.Id = id;
     }

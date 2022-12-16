@@ -1,15 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿namespace CSharpLabs.MarriageProblem.Web.Controllers.DTO;
 
-namespace CSharpLabs.MarriageProblem.Web.Controllers;
-
-public class CompareDTO
+public class CompareDto
 {
-    public CompareDTO()
-    {
-    }
+
     
-    public CompareDTO(string name1, string name2)
+    public CompareDto(string name1, string name2)
     {
         this.Name1 = name1;
         this.Name2 = name2;

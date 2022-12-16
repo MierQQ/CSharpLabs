@@ -1,5 +1,5 @@
 ﻿using CSharpLabs.MarriageProblem.Exceptions;
-using CSharpLabs.MarriageProblem.Web.Controllers;
+using CSharpLabs.MarriageProblem.Web.Controllers.DTO;
 
 namespace CSharpLabs.MarriageProblem.Princess;
 
@@ -10,29 +10,15 @@ public class PrincessWeb : IPrincessWeb
 
     private int _counter;
 
-    public int Attempt
-    {
-        set { _attempt = value; }
-    }
+    public int Attempt { get; set; }
 
-    private int _attempt;
-    public int Session
-    {
-        set { _session = value; }
-    }
+    public int Session { get; set; }
 
-    private int _session;
-
-    public HttpClient Client
-    {
-        set { _client = value; }
-    }
-
-    private HttpClient _client;
+    public HttpClient Client { get; set; }
 
     private readonly int _threshold;
     private readonly int _contenderNumber;
-    private string _url;
+    private readonly string _url;
 
     public PrincessWeb(int contenderNumber, int threshold, string url)
     {
@@ -70,8 +56,8 @@ public class PrincessWeb : IPrincessWeb
 
     public async Task<string> AskFreind(string first, string second)
     {
-        string postUrl = _url + "/freind/"+ _attempt +"/compare?session=" + _session + "&name1=" + first + "&name2=" + second;
-        ContenderDTO? dto = await (await _client.PostAsync(postUrl, new StringContent(""))).Content.ReadFromJsonAsync<ContenderDTO>();
+        string postUrl = _url + "/freind/"+ Attempt +"/compare?session=" + Session + "&name1=" + first + "&name2=" + second;
+        ContenderDto? dto = await (await Client.PostAsync(postUrl, new StringContent(""))).Content.ReadFromJsonAsync<ContenderDto>();
         if (dto is null)
         {
             throw new MarriageProblemException("compare error");

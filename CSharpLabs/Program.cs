@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Text;
+﻿using System.Text;
 using CSharpLabs.MarriageProblem.Contender.ContenderBuilder;
 using CSharpLabs.MarriageProblem.ContenderGenerator;
 using CSharpLabs.MarriageProblem.DataBase;
@@ -8,8 +7,6 @@ using CSharpLabs.MarriageProblem.Hall;
 using CSharpLabs.MarriageProblem.Princess;
 using CSharpLabs.MarriageProblem.Web;
 using CSharpLabs.MarriageProblem.Writer;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace CSharpLabs;
@@ -54,7 +51,7 @@ class Program
     
     private static IHostBuilder CreateWebBuilder(string[] args)
     {
-        return Host.CreateDefaultBuilder().ConfigureWebHostDefaults(builder =>
+        return Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(builder =>
         {
             builder.UseStartup<Startup>();
         });

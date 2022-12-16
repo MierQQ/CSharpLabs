@@ -1,7 +1,6 @@
 ﻿using CSharpLabs.MarriageProblem.Hall;
 using CSharpLabs.MarriageProblem.Princess;
 using CSharpLabs.MarriageProblem.Writer;
-using Microsoft.Extensions.Hosting;
 
 namespace CSharpLabs.MarriageProblem;
 
