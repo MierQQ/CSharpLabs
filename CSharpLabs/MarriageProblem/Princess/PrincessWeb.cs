@@ -57,7 +57,7 @@ public class PrincessWeb : IPrincessWeb
     public async Task<string> AskFreind(string first, string second)
     {
         string postUrl = _url + "/freind/"+ Attempt +"/compare?session=" + Session + "&name1=" + first + "&name2=" + second;
-        ContenderDto? dto = await (await Client.PostAsync(postUrl, new StringContent(""))).Content.ReadFromJsonAsync<ContenderDto>();
+        ContenderDto? dto = await (await Client!.PostAsync(postUrl, new StringContent(""))).Content.ReadFromJsonAsync<ContenderDto>();
         if (dto is null)
         {
             throw new MarriageProblemException("compare error");
