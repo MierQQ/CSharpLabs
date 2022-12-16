@@ -3,7 +3,7 @@ using CSharpLabs.MarriageProblem.Freind;
 
 namespace CSharpLabs.MarriageProblem.Princess;
 
-public class Princess : IPrincess
+public class Princess : IPrincess 
 {
     private Contender.IContender? _maxContender;
     public bool IsChosenOne { get; private set; }

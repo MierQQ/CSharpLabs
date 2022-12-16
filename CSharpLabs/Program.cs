@@ -6,9 +6,11 @@ using CSharpLabs.MarriageProblem.DataBase;
 using CSharpLabs.MarriageProblem.Freind;
 using CSharpLabs.MarriageProblem.Hall;
 using CSharpLabs.MarriageProblem.Princess;
+using CSharpLabs.MarriageProblem.Web;
 using CSharpLabs.MarriageProblem.Writer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace CSharpLabs;
 
@@ -24,8 +26,38 @@ class Program
             for (int i = 0; i < 100; ++i) 
                 CreateDbHostBuilder(args, db).Build().Start();
             */
-            CreateDbAttemptHostBuilder(args, db, 87).Build().Start();
+            var webHost = CreateWebBuilder(args).Build();
+            webHost.StartAsync();
+            CreateHostHttpBuilder(args).Build().Start();
+            webHost.StopAsync().Wait();
         }
+    }
+
+    private static IHostBuilder CreateHostHttpBuilder(string[] args)
+    {
+        var contenderNumber = int.Parse(ConfigurationManager.AppSettings["contenderNumber"] ?? string.Empty);
+        var threshold = int.Parse(ConfigurationManager.AppSettings["threshold"] ?? string.Empty);
+        var attempt = int.Parse(ConfigurationManager.AppSettings["attempt"] ?? string.Empty);
+        var session = int.Parse(ConfigurationManager.AppSettings["session"] ?? string.Empty);
+        var url = ConfigurationManager.AppSettings["url"] ?? string.Empty;
+        return Host.CreateDefaultBuilder(args).ConfigureServices(
+            services => services
+                .AddHostedService(x=>new MarriageProblem.MarriageProblemWeb(
+                    contenderNumber,
+                    x.GetRequiredService<IPrincessWeb>(),
+                    attempt,
+                    url,
+                    session))
+                .AddScoped<IPrincessWeb>(x => new PrincessWeb(contenderNumber, threshold, url))
+        );
+    }
+    
+    private static IHostBuilder CreateWebBuilder(string[] args)
+    {
+        return Host.CreateDefaultBuilder().ConfigureWebHostDefaults(builder =>
+        {
+            builder.UseStartup<Startup>();
+        });
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args)

@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using Microsoft.EntityFrameworkCore;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace CSharpLabs.MarriageProblem.DataBase;
 
